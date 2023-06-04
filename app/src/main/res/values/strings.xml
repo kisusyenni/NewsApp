@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="article_image">article_image</string>
+    <string name="load_data_error">Couldn\'t load data</string>
+    <string name="load_data_succeed">Data successfully loaded</string>
+    <string name="semua_berita">Semua Berita</string>
+    <string name="mandiri_news">Mandiri News</string>
+    <string name="berita_terkini">Berita Terkini</string>
+</resources>
