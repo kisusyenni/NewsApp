@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.error.observe(this) { res ->
             if (res != null) {
-                if (res.status === "error") {
+                if (res.status == "error") {
                     binding.tvError.text = if(res.message != "") res.message else resources.getString(R.string.load_data_error)
                     binding.tvError.visibility = View.VISIBLE
                 } else {

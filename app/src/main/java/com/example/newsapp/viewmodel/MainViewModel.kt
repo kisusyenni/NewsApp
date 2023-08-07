@@ -44,11 +44,6 @@ class MainViewModel : ViewModel() {
                     _listHeadlines.value = response.body()?.articles
                     _error.value = null
                 } else {
-//                    val result = ErrorMessage(
-//                        status = "error",
-//                        code = "error",
-//                        message = "Something is wrong..."
-//                    )
                     _error.value = convertErrorBody(response.errorBody())
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -85,11 +80,6 @@ class MainViewModel : ViewModel() {
                     _listNews.value = response.body()?.articles
                     _error.value = null
                 } else {
-//                    val result = ErrorMessage(
-//                        status = "error",
-//                        code = "error",
-//                        message = "Something is wrong..."
-//                    )
                     _error.value = convertErrorBody(response.errorBody())
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
