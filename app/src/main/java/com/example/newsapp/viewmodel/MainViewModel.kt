@@ -8,6 +8,8 @@ import com.example.newsapp.data.local.entity.Article
 import com.example.newsapp.data.local.entity.ErrorMessage
 import com.example.newsapp.data.remote.network.ApiConfig
 import com.example.newsapp.data.remote.response.NewsResponse
+import com.squareup.moshi.Moshi
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,12 +44,12 @@ class MainViewModel : ViewModel() {
                     _listHeadlines.value = response.body()?.articles
                     _error.value = null
                 } else {
-                    val result = ErrorMessage(
-                        status = "error",
-                        code = "error",
-                        message = "Something is wrong..."
-                    )
-                    _error.value = result
+//                    val result = ErrorMessage(
+//                        status = "error",
+//                        code = "error",
+//                        message = "Something is wrong..."
+//                    )
+                    _error.value = convertErrorBody(response.errorBody())
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
@@ -57,6 +59,17 @@ class MainViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
+    }
+
+    private fun convertErrorBody(errorBody: ResponseBody?): ErrorMessage? {
+        return try {
+            errorBody?.source()?.let {
+                val moshiAdapter = Moshi.Builder().build().adapter(ErrorMessage::class.java)
+                moshiAdapter.fromJson(it)
+            }
+        } catch (exception: Exception) {
+            null
+        }
     }
 
     fun getAllNews() {
@@ -72,12 +85,12 @@ class MainViewModel : ViewModel() {
                     _listNews.value = response.body()?.articles
                     _error.value = null
                 } else {
-                    val result = ErrorMessage(
-                        status = "error",
-                        code = "error",
-                        message = "Something is wrong..."
-                    )
-                    _error.value = result
+//                    val result = ErrorMessage(
+//                        status = "error",
+//                        code = "error",
+//                        message = "Something is wrong..."
+//                    )
+                    _error.value = convertErrorBody(response.errorBody())
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }

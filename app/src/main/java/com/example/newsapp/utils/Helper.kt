@@ -11,12 +11,12 @@ import java.util.Locale
 fun formatDate(dateString: String): String {
     return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val inputFormatter =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:SS'Z'", Locale.ENGLISH)
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:SS", Locale.ENGLISH)
         val outputFormatter = DateTimeFormatter.ofPattern("dd MMM, yyyy", Locale.ENGLISH)
         val date = LocalDate.parse(dateString, inputFormatter)
         outputFormatter.format(date)
     } else {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH)
         val outputFormat = SimpleDateFormat("dd MMM, yyyy", Locale.ENGLISH)
         val date: Date = inputFormat.parse(dateString) as Date
         outputFormat.format(date)
